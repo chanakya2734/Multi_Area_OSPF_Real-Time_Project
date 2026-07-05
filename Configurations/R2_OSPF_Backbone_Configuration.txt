@@ -19,7 +19,7 @@ R2(config)# do show ip interface brief
 R2(config)# router ospf 110
 R2(config-router)# network 2.2.2.2 0.0.0.0 area 0
 R2(config-router)# network 192.168.12.0 0.0.0.255 area 0
-R2(config-router)# network 192.168.24.0 0.0.0.255 area 0
+R2(config-router)# network 192.168.24.0 0.0.0.255 area 18
 R2(config-router)# exit
 R2(config)# do show run | s ospf
 R2(config)# do write
