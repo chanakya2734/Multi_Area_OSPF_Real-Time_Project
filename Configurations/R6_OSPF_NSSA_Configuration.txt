@@ -13,9 +13,9 @@ R6(config-if)# exit
 R6(config)# do write
 R6(config)# do show ip interface brief
 R6(config)# router ospf 110
-R6(config-router)# network 6.6.6.6 0.0.0.0 area 0
-R6(config-router)# network 192.168.36.0 0.0.0.255 area 0
-R6(config-router)# network 192.168.67.0 0.0.0.255 area 0
+R6(config-router)# network 6.6.6.6 0.0.0.0 area 20
+R6(config-router)# network 192.168.36.0 0.0.0.255 area 20
+R6(config-router)# network 192.168.67.0 0.0.0.255 area 20
 R6(config-router)# exit
 R6(config)# do show run | s ospf
 R6(config)# do write
