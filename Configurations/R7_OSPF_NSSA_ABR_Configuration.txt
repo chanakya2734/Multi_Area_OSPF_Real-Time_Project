@@ -1,1 +1,33 @@
-
+R7# configure terminal
+R7(config)# interface loopback 0
+R7(Config-if)# ip address 7.7.7.7 255.255.255.255
+R7(config-if)# exit
+R7(config)# interface g1/0
+R7(config-if)# ip address 192.168.67.7 255.255.255.0
+R7(config-if)# no shutdown
+R7(config-if)# exit
+R7(config)# interface g2/0
+R7(config-if)# ip address 192.168.79.7 255.255.255.0
+R7(config-if)# no shutdown
+R7(config-if)# exit
+R7(config)# do write
+R7(config)# do show ip interface brief
+R7(config)# router ospf 110
+R7(config-router)# network 7.7.7.7 0.0.0.0 area 0
+R7(config-router)# network 192.168.67.0 0.0.0.255 area 0
+R7(config-router)# network 192.168.79.0 0.0.0.255 area 0
+R7(config-router)# exit
+R7(config)# do show run | s ospf
+R7(config)# do write
+R7(config)# do show ip route
+R7(config)# router bgp 100
+R7(config-router)# neighbor 192.168.79.9 remote-as 200
+R7(config-router)# exit
+R7(config)# router ospf 110
+R7(config-router)# redistribute bgp 100 subnets
+R7(config-router)# exit
+R7(config)# router bgp 100
+R7(config-router)# redistribute ospf 110
+R7(config-router)# exit
+R7(config)# router ospf 110
+R7(config-router)# area 18 nssa
