@@ -1,1 +1,28 @@
-
+R1# configure terminal
+R1(config)# interface loopback 0
+R1(Config-if)# ip address 9.9.9.9 255.255.255.255
+R1(config-if)# exit
+R9(config)# interface g1/0
+R9(config-if)# ip address 192.168.79.9 255.255.255.0
+R9(config-if)# no shutdown
+R9(config-if)# exit
+R9(config)# interface fo/0
+R9(config-if)# ip address 192.168.2.100 255.255.255.0
+R9(config-if)# no shutdown
+R9(config-if)# exit
+R9(config)# do write
+R9(config)# do show ip interface brief
+R9(config)# ip dhcp pool CLOUD
+R9(config-dhcp)# network 192.168.2.0 255.255.255.0
+R9(config-dhcp)# default-router 192.168.2.100
+R9(config-dhcp)# dns-server 192.168.2.101 192.168.2.102
+R9(config-dhcp)# exit
+R9(config)# do show run | s dhcp
+R9(config)# router bgp 300
+R9(config-router)# network 9.9.9.9 mask 255.255.255.255
+R9(config-router)# network 192.168.79.0 mask 255.255.255.0
+R9(config-router)# network 192.168.79.7 remote-as 100
+R9(config-router)# exit
+R9(config)# do show run | s bgp
+R9(config)# do write
+R9(config)# do show ip route
