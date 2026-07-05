@@ -1,1 +1,29 @@
-
+R5# configure terminal
+R5(config)# interface loopback 0
+R5(Config-if)# ip address 5.5.5.5 255.255.255.255
+R5(config-if)# exit
+R5(config)# interface g1/0
+R5(config-if)# ip address 192.168.45.5 255.255.255.0
+R5(config-if)# no shutdown
+R5(config-if)# exit
+R5(config)# interface f1/0
+R5(config-if)# ip address 192.168.1.100 255.255.255.0
+R5(config-if)# no shutdown
+R5(config-if)# exit
+R5(config)# do write
+R5(config)# do show ip interface brief
+R5(config)# ip dhcp pool SBI-BANK
+R5(config-dhcp)# network 192.168.1.0 255.255.255.0
+R5(config-dhcp)# default-router 192.168.1.100
+R5(config-dhcp)# dns-server 192.168.1.101 192.168.1.102
+R5(config-dhcp)# exit
+R5(config)# do show run | s dhcp
+R5(config)# do write
+R5(config)# router ospf 110
+R5(config-router)# network 5.5.5.5 0.0.0.0 area 18
+R5(config-router)# network 192.168.1.0 0.0.0.255 area 18
+R5(config-router)# network 192.168.45.0 0.0.0.255 area 18
+R5(config-router)# exit
+R5(config)# do show run | s ospf
+R5(config)# do write
+R5(config)# do show ip route
