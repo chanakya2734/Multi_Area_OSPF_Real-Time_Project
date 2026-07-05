@@ -1,1 +1,24 @@
-
+R6# configure terminal
+R6(config)# interface loopback 0
+R6(Config-if)# ip address 6.6.6.6 255.255.255.255
+R6(config-if)# exit
+R6(config)# interface g1/0
+R6(config-if)# ip address 192.168.67.6 255.255.255.0
+R6(config-if)# no shutdown
+R6(config-if)# exit
+R6(config)# interface g3/0
+R6(config-if)# ip address 192.168.36.6 255.255.255.0
+R6(config-if)# no shutdown
+R6(config-if)# exit
+R6(config)# do write
+R6(config)# do show ip interface brief
+R6(config)# router ospf 110
+R6(config-router)# network 6.6.6.6 0.0.0.0 area 0
+R6(config-router)# network 192.168.36.0 0.0.0.255 area 0
+R6(config-router)# network 192.168.67.0 0.0.0.255 area 0
+R6(config-router)# exit
+R6(config)# do show run | s ospf
+R6(config)# do write
+R6(config)# do show ip route
+R6(config)# router ospf 110
+R6(config-router)# area 18 nssa
