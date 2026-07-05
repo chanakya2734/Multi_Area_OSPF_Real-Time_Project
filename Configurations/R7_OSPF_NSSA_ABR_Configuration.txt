@@ -13,9 +13,9 @@ R7(config-if)# exit
 R7(config)# do write
 R7(config)# do show ip interface brief
 R7(config)# router ospf 110
-R7(config-router)# network 7.7.7.7 0.0.0.0 area 0
-R7(config-router)# network 192.168.67.0 0.0.0.255 area 0
-R7(config-router)# network 192.168.79.0 0.0.0.255 area 0
+R7(config-router)# network 7.7.7.7 0.0.0.0 area 20
+R7(config-router)# network 192.168.67.0 0.0.0.255 area 20
+R7(config-router)# network 192.168.79.0 0.0.0.255 area 20
 R7(config-router)# exit
 R7(config)# do show run | s ospf
 R7(config)# do write
