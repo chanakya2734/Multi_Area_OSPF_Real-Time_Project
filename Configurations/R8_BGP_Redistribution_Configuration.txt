@@ -1,1 +1,18 @@
-
+R8# configure terminal
+R8(config)# interface loopback 0
+R8(Config-if)# ip address 8.8.8.8 255.255.255.255
+R8(config-if)# exit
+R8(config)# interface g3/0
+R8(config-if)# ip address 192.168.18.8 255.255.255.0
+R8(config-if)# no shutdown
+R8(config-if)# exit
+R8(config)# do write
+R8(config)# do show ip interface brief
+R8(config)# router bgp 200
+R8(config-router)# network 192.168.18.1 remote-as 100
+R8(config-router)# network 192.168.18.0 mask 255.255.255.0
+R8(config-router)# network 8.8.8.8 mask 255.255.255.255
+R8(config-router)# exit
+R8(config)# do show run | s bgp
+R8(config)# do write
+R8(config)# do show ip route
