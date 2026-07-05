@@ -1,1 +1,26 @@
-
+R2# configure terminal
+R2(config)# interface loopback 0
+R2(Config-if)# ip address 2.2.2.2 255.255.255.255
+R2(config-if)# exit
+R2(config)# interface g1/0
+R2(config-if)# ip address 192.168.12.2 255.255.255.0
+R2(config-if)# no shutdown
+R2(config-if)# exit
+R2(config)# interface g2/0
+R2(config-if)# ip address 192.168.23.2 255.255.255.0
+R2(config-if)# no shutdown
+R2(config-if)# exit
+R2(config)# interface g3/0
+R2(config-if)# ip address 192.168.24.2 255.255.255.0
+R2(config-if)# no shutdown
+R2(config-if)# exit
+R2(config)# do write
+R2(config)# do show ip interface brief
+R2(config)# router ospf 110
+R2(config-router)# network 2.2.2.2 0.0.0.0 area 0
+R2(config-router)# network 192.168.12.0 0.0.0.255 area 0
+R2(config-router)# network 192.168.24.0 0.0.0.255 area 0
+R2(config-router)# exit
+R2(config)# do show run | s ospf
+R2(config)# do write
+R2(config)# do show ip route
